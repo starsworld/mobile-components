@@ -10,7 +10,7 @@ class Page extends React.Component{
 
     render(){
         const {children, style, className, transition} = this.props;
-        const cls = classNames('weui-page', className);
+        const cls = classNames('ui-page', className);
         return (
             <div className={cls}
                  style={Object.assign({}, {animationName: transition ? 'pageInRight': ''}, style)}>

@@ -15,8 +15,8 @@ class Mask extends React.Component {
     render() {
         const {transparent, className, ...others} = this.props;
         const clz = classNames({
-            'weui-mask': !transparent,
-            'weui-mask_transparent': transparent
+            'ui-mask': !transparent,
+            'ui-mask_transparent': transparent
         }, className);
         return (
             <div className={clz} {...others}></div>

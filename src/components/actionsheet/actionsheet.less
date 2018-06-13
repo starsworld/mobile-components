@@ -1,19 +1,19 @@
 @import "../../utils/base";
 
-.weui-skin_android {
-    .weui-actionsheet_toggle {
+.ui-skin_android {
+    .ui-actionsheet_toggle {
         opacity: 1 !important;
         top: 50% !important;
         bottom: auto !important;
     }
-    .weui-actionsheet {
+    .ui-actionsheet {
         opacity: 0;
         transition: opacity .3s;
         top: 150%;
         bottom: 0;
     }
 }
-.weui-actionsheet {
+.ui-actionsheet {
     position: fixed;
     left: 0;
     bottom: 0;
@@ -25,7 +25,7 @@
     //slide up animation
     transition: transform .3s;
 }
-.weui-actionsheet__title {
+.ui-actionsheet__title {
     position: relative;
     height: 65px;
     padding: 0 20px;
@@ -40,18 +40,18 @@
     &:before {
         .setBottomLine(#e5e5e5);
     }
-    .weui-actionsheet__title-text {
+    .ui-actionsheet__title-text {
         .ellipsisLn(2);
     }
 }
-.weui-actionsheet__menu {
+.ui-actionsheet__menu {
     background-color: #FCFCFD;
 }
-.weui-actionsheet__action {
+.ui-actionsheet__action {
     margin-top: 6px;
     background-color: #FCFCFD;;
 }
-.weui-actionsheet__cell {
+.ui-actionsheet__cell {
     position: relative;
     padding: 10px 0;
     text-align: center;
@@ -71,8 +71,8 @@
 
 
 //android actionSheet
-.weui-skin_android{
-    .weui-actionsheet {
+.ui-skin_android{
+    .ui-actionsheet {
         position: fixed;
         left: 50%;
         top: 50%;
@@ -86,14 +86,14 @@
         //slide up animation
         transition: transform .3s;
     }
-    .weui-actionsheet__action{
+    .ui-actionsheet__action{
         display: none;
     }
-    .weui-actionsheet__menu {
+    .ui-actionsheet__menu {
         border-radius: 2px;
         box-shadow: 0 6px 30px 0 rgba(0,0,0,.1);
     }
-    .weui-actionsheet__cell {
+    .ui-actionsheet__cell {
         padding: 13px 24px;
         font-size: 16px;
         line-height: 1.4;
@@ -110,6 +110,6 @@
 }
 
 //actionSheet aniamtion
-.weui-actionsheet_toggle{
+.ui-actionsheet_toggle{
     transform: translate(0, 0);
 }

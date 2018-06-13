@@ -30,7 +30,7 @@ class ActionSheet extends Component {
         return this.props.menus.map((menu, idx) => {
             const {label, className, ...others} = menu;
             const cls = classNames({
-                'weui-actionsheet__cell': true,
+                'ui-actionsheet__cell': true,
                 [className]: className
             });
 
@@ -44,7 +44,7 @@ class ActionSheet extends Component {
         return this.props.actions.map((action, idx) => {
             const {label, className, ...others} = action;
             const cls = classNames({
-                'weui-actionsheet__cell': true,
+                'ui-actionsheet__cell': true,
                 [className]: className
             });
 
@@ -61,18 +61,18 @@ class ActionSheet extends Component {
     render(){
         const {show, type, onRequestClose, menus, actions, ...others} = this.props;
         const cls = classNames({
-            'weui-actionsheet': true,
-            'weui-actionsheet_toggle': show
+            'ui-actionsheet': true,
+            'ui-actionsheet_toggle': show
         });
         let styleType = type ? type : 'ios';
         return (
-            <div className={styleType === 'android' ? 'weui-skin_android' : ''}>
+            <div className={styleType === 'android' ? 'ui-skin_android' : ''}>
                 <Mask style={{display: show ? 'block': 'none'}} onClick={this.handleMaskClick}/>
                 <div className={cls} {...others}>
-                    <div className='weui-actionsheet__menu'>
+                    <div className='ui-actionsheet__menu'>
                         {this.renderMenuItem()}
                     </div>
-                    <div className='weui-actionsheet__action'>
+                    <div className='ui-actionsheet__action'>
                         {this.renderActions()}
                     </div>
                 </div>

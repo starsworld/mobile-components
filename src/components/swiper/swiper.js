@@ -159,7 +159,7 @@ class Swiper extends React.Component {
 
     renderPagination() {
         return this.props.children.map((child, i) => {
-            let clx = classNames('react-weui-swiper__pagination-bullet', {
+            let clx = classNames('react-ui-swiper__pagination-bullet', {
                 active: i === this.state.currentIndex
             });
             return (
@@ -170,9 +170,9 @@ class Swiper extends React.Component {
 
     render() {
         const {className, children, height, width, defaultIndex, direction, speed, indicators, ...domProps} = this.props;
-        let cls = classNames('react-weui-swiper__container', className, {
-            'react-weui-swiper__container-horizontal': direction === 'horizontal',
-            'react-weui-swiper__container-vertical': direction === 'vertical'
+        let cls = classNames('react-ui-swiper__container', className, {
+            'react-ui-swiper__container-horizontal': direction === 'horizontal',
+            'react-ui-swiper__container-vertical': direction === 'vertical'
         });
 
         let containerStyle = {
@@ -195,13 +195,13 @@ class Swiper extends React.Component {
                  style={containerStyle}
                  ref='container'
             >
-                <div className='react-weui-swiper__wrapper'
+                <div className='react-ui-swiper__wrapper'
                      style={wrapperStyle}
                 >
                     {
                         children.map((child, i) => {
                             return React.cloneElement(child, {
-                                className: classNames('react-weui-swiper__item', child.className),
+                                className: classNames('react-ui-swiper__item', child.className),
                                 key: i,
                                 style: Object.assign({}, child.props.style, {
                                     display: direction === 'horizontal' ? 'inline-block' : 'block',
@@ -215,7 +215,7 @@ class Swiper extends React.Component {
                 </div>
                 {indicators ?
                     <div
-                        className="react-weui-swiper__pagination"
+                        className="react-ui-swiper__pagination"
                     >
                         {this.renderPagination()}
                     </div>

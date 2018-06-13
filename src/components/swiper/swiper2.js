@@ -176,7 +176,7 @@ class Swiper extends React.Component {
 
     renderPagination() {
         return this.props.children.map((child, i) => {
-            let clx = classNames('react-weui-swiper__pagination-bullet', {
+            let clx = classNames('react-ui-swiper__pagination-bullet', {
                 active: i === this.state.currentIndex
             });
             return (
@@ -198,7 +198,7 @@ class Swiper extends React.Component {
                 React.cloneElement(child, {
                     key: 'original' + index,
                     "data-index": index,
-                    className: 'slide-item react-weui-swiper__item',
+                    className: 'slide-item react-ui-swiper__item',
                     style: Object.assign({}, child.props.style, {
                         display: direction === 'horizontal' ? 'inline-block' : 'block',
                         verticalAlign: direction === 'horizontal' ? 'top' : 'bottom',
@@ -216,7 +216,7 @@ class Swiper extends React.Component {
                     React.cloneElement(child, {
                         key: 'pre' + index,
                         "data-index": -1,
-                        className: 'slide-item slide-cloned react-weui-swiper__item',
+                        className: 'slide-item slide-cloned react-ui-swiper__item',
                         style: Object.assign({}, child.props.style, {
                             display: direction === 'horizontal' ? 'inline-block' : 'block',
                             verticalAlign: direction === 'horizontal' ? 'top' : 'bottom',
@@ -235,7 +235,7 @@ class Swiper extends React.Component {
                 React.cloneElement(child, {
                     key: 'post' + index,
                     'data-index': key,
-                    className: 'slide-item slide-cloned react-weui-swiper__item',
+                    className: 'slide-item slide-cloned react-ui-swiper__item',
                     style: Object.assign({}, child.props.style, {
                         display: direction === 'horizontal' ? 'inline-block' : 'block',
                         verticalAlign: direction === 'horizontal' ? 'top' : 'bottom',
@@ -254,9 +254,9 @@ class Swiper extends React.Component {
 
     render() {
         const {className, children, height, width, defaultIndex, direction, speed, indicators, ...domProps} = this.props;
-        let cls = classNames('react-weui-swiper__container', className, {
-            'react-weui-swiper__container-horizontal': direction === 'horizontal',
-            'react-weui-swiper__container-vertical': direction === 'vertical'
+        let cls = classNames('react-ui-swiper__container', className, {
+            'react-ui-swiper__container-horizontal': direction === 'horizontal',
+            'react-ui-swiper__container-vertical': direction === 'vertical'
         });
 
         let containerStyle = {
@@ -279,14 +279,14 @@ class Swiper extends React.Component {
                  style={containerStyle}
                  ref='container'
             >
-                <div className='react-weui-swiper__wrapper'
+                <div className='react-ui-swiper__wrapper'
                      style={wrapperStyle}
                 >
                     {this.renderSlides(children, direction, this.state.containerWidth, this.state.containerHeight)}
                 </div>
                 {indicators ?
                     <div
-                        className="react-weui-swiper__pagination"
+                        className="react-ui-swiper__pagination"
                     >
                         {this.renderPagination()}
                     </div>
