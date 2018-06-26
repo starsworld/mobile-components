@@ -22,8 +22,11 @@ class Swiper extends React.Component {
         defaultIndex: 0,
         direction: 'horizontal',
         threshold: 50,
-        speed: 300,
-        indicators: true
+        speed: 300,  //回弹时间
+        indicators: true,
+        autoplay: true,
+        autoplaySpeed: 3000, //自动时间
+        autoplayTime: 800
     };
 
     constructor(props) {
@@ -38,13 +41,36 @@ class Swiper extends React.Component {
             ogTranslate: 0,
             touchId: undefined,
             translate: 0,
-            animating: false
+            animating: 'bounce'
         };
 
         this.handleTouchStart = this.handleTouchStart.bind(this);
         this.handleTouchMove = this.handleTouchMove.bind(this);
         this.handleTouchEnd = this.handleTouchEnd.bind(this);
     }
+
+    autoplay(){
+        this.autoplayTimer = setInterval(this.play.bind(this), this.props.autoplaySpeed);
+    }
+
+    play = () => {
+        let nextIndex;
+        nextIndex = this.state.currentIndex + 1;
+        this.slideHandler(nextIndex);
+    };
+
+    pause(){
+        if(this.autoplayTimer){
+            clearInterval(this.autoplayTimer);
+            this.autoplayTimer = null;
+        }
+    }
+
+    componentWillUnmount = () => {
+        if(this.autoplayTimer){
+            clearInterval(this.autoplayTimer);
+        }
+    };
 
     componentDidMount() {
         let $container = ReactDOM.findDOMNode(this.refs.container);
@@ -55,6 +81,8 @@ class Swiper extends React.Component {
             containerWidth: $container.offsetWidth,
             containerHeight: $container.offsetHeight,
             translate: this.props.defaultIndex <= this.props.children.length ? this.props.direction === 'horizontal' ? $container.offsetWidth * -(this.props.defaultIndex + 1) : $container.offsetHeight * -this.props.defaultIndex : 0
+        }, () => {
+            this.props.autoplay && this.autoplay();
         });
     }
 
@@ -74,7 +102,7 @@ class Swiper extends React.Component {
             ogTranslate: this.state.translate,
             touchId: e.targetTouches[0].identifier,
             og: og,
-            animating: false
+            animating: 'none'
         });
 
     }
@@ -140,17 +168,17 @@ class Swiper extends React.Component {
                 let maxWidth = this.state.containerWidth * this.props.children.length;
                 if (isNext && translate < -maxWidth) {
                     this.setState({
-                        animating: false,
+                        animating: 'none',
                         translate: -this.state.containerWidth
                     });
                 } else if (!isNext && translate > -this.state.containerWidth) {
                     this.setState({
-                        animating: false,
+                        animating: 'none',
                         translate: -maxWidth
                     })
                 }
             } else {
-                this.setState({animating: false});
+                this.setState({animating: 'none'});
             }
         };
 
@@ -166,12 +194,43 @@ class Swiper extends React.Component {
             og: 0,
             touchId: undefined,
             ogTranslate: 0,
-            animating: true,
+            animating: 'bounce',
             translate,
             currentIndex: index
         }, () => setTimeout(() => {
             resetProps();
-        }, this.props.speed));
+        }, this.props.speed + 50));
+    }
+
+    slideHandler(index){
+        let slideCount = this.props.children.length;
+        let slideWidth = this.state.containerWidth;
+        let state = {}, nextState = {};
+        let animationSlide = index, finalSlide = animationSlide, animationLeft, finalLeft;
+        if(animationSlide < 0){
+            finalSlide = animationSlide + slideCount;
+        }else if(animationSlide >= slideCount){
+            finalSlide = animationSlide - slideCount;
+        }
+
+        animationLeft = (animationSlide + 1) * -1 * slideWidth;
+        finalLeft = (finalSlide + 1) * -1 * slideWidth;
+
+        state = {
+            animating: 'auto',
+            translate: animationLeft,
+            currentIndex: finalSlide
+        };
+
+        nextState = {
+            animating: 'none',
+            translate: finalLeft,
+            currentIndex: finalSlide
+        };
+
+        this.setState(state, () => setTimeout(() => {
+            this.setState(nextState);
+        }, this.props.autoplayTime + 50));
     }
 
     renderPagination() {
@@ -267,7 +326,7 @@ class Swiper extends React.Component {
         let wrapperStyle = {
             width: this.state.wrapperWidth,
             height: this.state.wrapperHeight,
-            transition: this.state.animating ? `transform .${speed / 100}s` : 'none',
+            transition: this.state.animating === 'none' ? 'none' :( this.state.animating === 'bounce' ? `transform .${speed / 100}s` : `transform .${this.props.autoplayTime / 100}s`),
             transform: `translate(${direction === 'horizontal' ? this.state.translate : 0}px, ${direction === 'vertical' ? this.state.translate : 0}px)`
         };
 

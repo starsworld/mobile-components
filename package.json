@@ -32,6 +32,6 @@
         "start": "webpack-dev-server --open --config webpack.dev.js --host 0.0.0.0",
         "build": "webpack --config webpack.prod.js"
     },
-    "author": "",
-    "license": "ISC"
+    "author": "lmq",
+    "license": "MIT"
 }

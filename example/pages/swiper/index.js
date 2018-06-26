@@ -4,7 +4,6 @@ import {Page, Swiper, Swiper2} from '../../../src';
 export default class SwiperDemo extends React.Component {
     handleClick(){
         console.log('click')
-        alert('click')
     }
 
     render() {
